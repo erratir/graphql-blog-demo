@@ -2,27 +2,25 @@
 #- include: nginx.yaml
 -
 - hosts: all
-# become: yes
+  # become: yes
 
   vars:
-   node_version: "14.7.0"
+    node_version: '14.7.0'
 
   collections:
     - nginxinc.nginx_controller
 
   roles:
     - role: ansible-role-nvm
-      nodejs_version: "{{ node_version }}"
-      nvm_install: "curl"
+      nodejs_version: '{{ node_version }}'
+      nvm_install: 'curl'
       nvm_commands:
-        - "nvm exec default npm install -g yarn"
-        - "nvm exec default npm install -g pm2"
-      become: true            # THIS WILL CHANGE THE LOGIN CONTEXT TO USE THE USER BELOW
-      become_user: deploy   # THIS INSTALLS NVM IN THE CONTEXT OF THE EC2-USER/DEFAULT USER
+        - 'nvm exec default npm install -g yarn'
+        - 'nvm exec default npm install -g pm2'
+      become: true # THIS WILL CHANGE THE LOGIN CONTEXT TO USE THE USER BELOW
+      become_user: deploy # THIS INSTALLS NVM IN THE CONTEXT OF THE EC2-USER/DEFAULT USER
 
     - role: nginx
-
-
 #- hosts: dev
 #
 #  vars_files:
