@@ -1,0 +1,39 @@
+# стадии нашего pipeline. Для группировки jobs.
+# Нужно помнить, что stages выполняются последовательно, а job параллельно.
+stages:
+  # укажем одну стадию с именем test
+  - test
+
+# создадим job с именем eslint
+eslint:
+  # укажем нужный Docker образw
+  image: node:14.17.0-alpine
+  # добавим ее в стадию test
+  stage: test
+  # укажем переменные окружения. В отличие от GitHub, в GitLab
+  # переменные окружения являются постоянными для всей job.
+  variables:
+    NODE_VERSION: 14.17.0
+  # секция script описывает шаги
+  script:
+    # установка зависимостей
+    - npm install
+    # запуск ESLint
+ #   - npm run lint
+
+# создадим job с именем prettier
+prettier:
+  # укажем нужный Docker образw
+  image: node:14.17.0-alpine
+  # добавим ее в стадию test
+  stage: test
+  # укажем переменные окружения. В отличие от GitHub, в GitLab
+  # переменные окружения являются постоянными для всей job.
+  variables:
+    NODE_VERSION: 14.17.0
+  # секция script описывает шаги
+  script:
+    # установка зависимостей
+    - npm install
+    # запуск Prettier
+    - npx prettier
