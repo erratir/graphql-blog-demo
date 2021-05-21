@@ -30,9 +30,14 @@ eslint:
   # секция script описывает шаги
   script:
     # запуск ESLint
-   - npx eslint .
+   - npm run lint
 
 prettier:
   stage: test
   script:
-    - npx prettier --write .
+    - npm run check:format # npx prettier --single-quote --write .
+
+tsc:
+  stage: test
+  script:
+    - npm run check:types
