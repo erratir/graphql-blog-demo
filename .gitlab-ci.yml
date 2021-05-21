@@ -4,36 +4,35 @@ stages:
   # укажем одну стадию с именем test
   - test
 
+# укажем нужный Docker образ глобально
+image: node:14.17.0-alpine
+
+# определим кеширование
+cache:
+  # ключ кеширования
+  key:
+    # файл или файлы
+    files:
+      # наш lock-файл с зависимостями
+      - package-lock.json
+  # что кешировать
+  paths:
+    - .npm/
+
+# определим новую секцию для подготовки кеша
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
 # создадим job с именем eslint
 eslint:
-  # укажем нужный Docker образw
-  image: node:14.17.0-alpine
   # добавим ее в стадию test
   stage: test
-  # укажем переменные окружения. В отличие от GitHub, в GitLab
-  # переменные окружения являются постоянными для всей job.
-  variables:
-    NODE_VERSION: 14.17.0
   # секция script описывает шаги
   script:
-    # установка зависимостей
-    - npm install
     # запуск ESLint
- #   - npm run lint
+   - npx eslint .
 
-# создадим job с именем prettier
 prettier:
-  # укажем нужный Docker образw
-  image: node:14.17.0-alpine
-  # добавим ее в стадию test
   stage: test
-  # укажем переменные окружения. В отличие от GitHub, в GitLab
-  # переменные окружения являются постоянными для всей job.
-  variables:
-    NODE_VERSION: 14.17.0
-  # секция script описывает шаги
   script:
-    # установка зависимостей
-    - npm install
-    # запуск Prettier
     - npx prettier --write .
