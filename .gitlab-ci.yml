@@ -36,4 +36,4 @@ prettier:
     # установка зависимостей
     - npm install
     # запуск Prettier
-    - npx prettier
+    - npx prettier --write .
