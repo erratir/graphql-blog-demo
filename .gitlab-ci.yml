@@ -35,6 +35,7 @@ eslint:
 
 prettier:
   stage: test
+  allow_failure: true
   script:
     - npm run check:format # npx prettier --single-quote --write .
 
