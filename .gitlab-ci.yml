@@ -64,4 +64,4 @@ deploy:
       - chmod 700 ~/.ssh
       - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       - scp -r ./.next package.json nexus.tsconfig.json next.config.js prisma $SSH_USER@$SSH_HOST:~/graphql-blog-demo/
-      - ssh $SSH_USER@$SSH_HOST "pushd graphql-blog-demo && cd ~/graphql-blog-demo && npm install --production && popd && pm2 start"
+      - ssh $SSH_USER@$SSH_HOST "cd ~/graphql-blog-demo && npm install --production && cd .. && pm2 start"
