@@ -3,6 +3,7 @@
 stages:
   # укажем одну стадию с именем test
   - test
+  - build
 
 # укажем нужный Docker образ глобально
 image: node:14.17.0-alpine
