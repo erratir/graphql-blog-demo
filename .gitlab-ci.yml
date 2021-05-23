@@ -49,5 +49,5 @@ build:
     - npm run build
   artifacts:
     paths:
-      - build
+      - .next/
     expire_in: 1 week
