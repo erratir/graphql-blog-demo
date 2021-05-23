@@ -41,3 +41,12 @@ tsc:
   stage: test
   script:
     - npm run check:types
+
+build:
+  stage: build
+  script:
+    - npm run build
+  artifacts:
+    paths:
+      - build
+    expire_in: 1 week
