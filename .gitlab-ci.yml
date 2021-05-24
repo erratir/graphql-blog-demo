@@ -29,6 +29,7 @@ before_script:
 eslint:
   # добавим ее в стадию test
   stage: test
+  needs: []
   # секция script описывает шаги
   script:
     # запуск ESLint
@@ -42,6 +43,7 @@ prettier:
 
 tsc:
   stage: test
+  needs: []
   script:
     - npm run check:types
 
@@ -58,10 +60,11 @@ deploy:
   stage: deploy
   script:
       - apk --update add openssh-client
-      - eval $(ssh-agent -s) 
+      - eval $(ssh-agent -s)
       - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
       - mkdir -p ~/.ssh
       - chmod 700 ~/.ssh
       - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       - scp -r ./.next package.json nexus.tsconfig.json next.config.js prisma $SSH_USER@$SSH_HOST:~/graphql-blog-demo/
       - ssh $SSH_USER@$SSH_HOST "cd ~/graphql-blog-demo && npm install --production && cd .. && pm2 start"
+  needs: ['build']
