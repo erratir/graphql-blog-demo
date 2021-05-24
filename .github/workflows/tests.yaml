@@ -13,7 +13,8 @@ jobs:
     name: Install and cache dependencies
     runs-on: ubuntu-20.04
     container:
-      image: node:14.17-alpine
+      # github actions/cache@v2 not work on node alpine
+      image: node:14.17-stretch-slim
     steps:
       - uses: actions/checkout@v2
       - name: Cache dependencies
@@ -29,7 +30,7 @@ jobs:
     needs: cache
     runs-on: ubuntu-20.04
     container:
-      image: node:14.17-alpine
+      image: node:14.17-stretch-slim
     steps:
       - uses: actions/checkout@v2
       - name: Cache dependencies
@@ -48,7 +49,7 @@ jobs:
     needs: cache
     runs-on: ubuntu-20.04
     container:
-      image: node:14.17-alpine
+      image: node:14.17-stretch-slim
     steps:
       - uses: actions/checkout@v2
       - name: Cache dependencies
