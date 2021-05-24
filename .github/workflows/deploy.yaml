@@ -43,6 +43,8 @@ jobs:
           path: |
             .next
             prisma
+            nexus.tsconfig.json
+            next.config.js
             package.json
             package-lock.json
   deploy:
@@ -68,7 +70,6 @@ jobs:
       - name: Copy builde files to the server
         run: |
           rsync -zavP \
-          --exclude ansible --exclude apollo --exclude components --exclude lib --exclude node-modules --exclude \
           --delete \
           . $SSH_USER@$SSH_HOST:~/graphql-blog-demo/
 #        run: |
