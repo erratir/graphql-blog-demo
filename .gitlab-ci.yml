@@ -71,5 +71,5 @@ deploy:
       - chmod 700 ~/.ssh
       - echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
       - scp -r ./.next package.json nexus.tsconfig.json next.config.js prisma $SSH_USER@$SSH_HOST:~/graphql-blog-demo/
-      - ssh $SSH_USER@$SSH_HOST "cd ~/graphql-blog-demo && npm install --production && cd .. && BACKEND_VERSION=$CI_COMMIT_SHORT_SHA pm2 start"
+      - ssh $SSH_USER@$SSH_HOST "cd ~/graphql-blog-demo && npm install --production && cd .. && BACKEND_VERSION=$CI_COMMIT_SHORT_SHA pm2 restart all --update-env"
   needs: ['build']
