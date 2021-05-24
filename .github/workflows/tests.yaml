@@ -25,6 +25,23 @@ jobs:
           restore-keys: npm-
       - name: "Install dependencies"
         run: npm ci --ignore-scripts
+  eslint:
+    needs: cache
+    runs-on: ubuntu-20.04
+    container:
+      image: node:14.17-stretch-slim
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: npm-${{ hashFiles('package-lock.json') }}
+          restore-keys: npm-
+      - name: "Install dependencies"
+        run: npm ci
+      - name: lint
+        run: npm run lint
   prettier:
     needs: cache
     runs-on: ubuntu-20.04
