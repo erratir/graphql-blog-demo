@@ -61,10 +61,11 @@ build:
 
 deploy:
   stage: deploy
+  image: node:14.17.0-stretch
 #  variables:
 #    BACKEND_VERSION: $CI_COMMIT_SHORT_SHA
   script:
-      - apk --update add openssh-client
+#      - apk --update add openssh-client
       - eval $(ssh-agent -s)
       - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
       - mkdir -p ~/.ssh
