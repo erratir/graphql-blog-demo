@@ -51,6 +51,7 @@ build:
   stage: build
   variables:
     NEXT_PUBLIC_HOST: http://$SSH_HOST
+    NEXT_PUBLIC_FRONTEND_VERSION: $(git rev-parse --short HEAD)
   script:
     - npm run build
   artifacts:
