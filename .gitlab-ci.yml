@@ -49,6 +49,8 @@ tsc:
 
 build:
   stage: build
+  variables:
+    NEXT_PUBLIC_HOST: http://$SSH_HOST
   script:
     - npm run build
   artifacts:
