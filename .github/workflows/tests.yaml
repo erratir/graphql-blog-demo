@@ -43,7 +43,7 @@ jobs:
         run: npm ci
       - name: Check our source code by prettier
         continue-on-error: true
-        run: npx prettier --check "**/**.js" --single-quote
+        run: npm run check:format
   typescript:
     needs: cache
     runs-on: ubuntu-20.04
@@ -61,4 +61,4 @@ jobs:
       - name: "Install dependencies"
         run: npm ci
       - name: TypeScript check
-        run: npx tsc
+        run: npm run check:types
