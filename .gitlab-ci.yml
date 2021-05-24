@@ -61,7 +61,7 @@ build:
 
 deploy:
   stage: deploy
-  image: node:14.17.0-stretch-slim
+  image: node:14.17.0-stretch
 #  variables:
 #    BACKEND_VERSION: $CI_COMMIT_SHORT_SHA
   script:
